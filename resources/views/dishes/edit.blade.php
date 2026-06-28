@@ -66,43 +66,40 @@
         </div>
     </div>
 
-    <script>
-        let ingredientIndex = {{ count(old('ingredients', $dish->ingredients->toArray())) }};
+   <script>
+    let ingredientIndex = {{ count(old('ingredients', $dish->ingredients->toArray())) }};
 
-        function addIngredient() {
-            const list = document.getElementById('ingredient-list');
-            const item = document.createElement('div');
-            item.className = 'grid gap-3 sm:grid-cols-[1fr_1fr_1fr_auto] items-end p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900';
-            item.innerHTML = `
-                <div>
-                    <label class="block text-xs font-medium text-gray-500 dark:text-gray-400">Nom</label>
-                    <input type="text" name="ingredients[
-${ingredientIndex}"][name]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required />
-                </div>
-                <div>
-                    <label class="block text-xs font-medium text-gray-500 dark:text-gray-400">Quantité</label>
-                    <input type="number" step="0.01" name="ingredients[
-${ingredientIndex}"][quantity]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required />
-                </div>
-                <div>
-                    <label class="block text-xs font-medium text-gray-500 dark:text-gray-400">Unité</label>
-                    <input type="text" name="ingredients[
-${ingredientIndex}"][unit]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
-                </div>
-                <div>
-                    <button type="button" onclick="removeIngredient(event)" class="inline-flex items-center px-3 py-2 bg-red-600 text-white rounded-md text-xs font-semibold hover:bg-red-500">Supprimer</button>
-                </div>
-            `;
-            list.appendChild(item);
-            ingredientIndex++;
-        }
+    function addIngredient() {
+        const list = document.getElementById('ingredient-list');
+        const item = document.createElement('div');
+        item.className = 'grid gap-3 sm:grid-cols-[1fr_1fr_1fr_auto] items-end p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900';
+        item.innerHTML = `
+            <div>
+                <label class="block text-xs font-medium text-gray-500 dark:text-gray-400">Nom</label>
+                <input type="text" name="ingredients[${ingredientIndex}][name]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required />
+            </div>
+            <div>
+                <label class="block text-xs font-medium text-gray-500 dark:text-gray-400">Quantité</label>
+                <input type="number" step="0.01" name="ingredients[${ingredientIndex}][quantity]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" required />
+            </div>
+            <div>
+                <label class="block text-xs font-medium text-gray-500 dark:text-gray-400">Unité</label>
+                <input type="text" name="ingredients[${ingredientIndex}][unit]" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+            </div>
+            <div>
+                <button type="button" onclick="removeIngredient(event)" class="inline-flex items-center px-3 py-2 bg-red-600 text-white rounded-md text-xs font-semibold hover:bg-red-500">Supprimer</button>
+            </div>
+        `;
+        list.appendChild(item);
+        ingredientIndex++;
+    }
 
-        function removeIngredient(event) {
-            const button = event.currentTarget;
-            const row = button.closest('div.grid');
-            if (row) {
-                row.remove();
-            }
+    function removeIngredient(event) {
+        const button = event.currentTarget;
+        const row = button.closest('div.grid');
+        if (row) {
+            row.remove();
         }
-    </script>
+    }
+</script>
 </x-app-layout>
