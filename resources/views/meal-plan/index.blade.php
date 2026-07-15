@@ -33,18 +33,18 @@
                             $meals = ['midi' => 'Midi', 'soir' => 'Soir'];
                         @endphp
 
-                        <div class="lg:overflow-x-auto lg:pb-3">
-                            <div class="space-y-3 lg:space-y-0 lg:min-w-[72rem]">
-                                <div class="hidden lg:flex gap-2 mb-2">
+                        <div class="desktop:overflow-x-auto desktop:pb-3">
+                            <div class="space-y-3 desktop:space-y-0 desktop:min-w-[72rem]">
+                                <div class="hidden desktop:flex gap-2 mb-2">
                                     @foreach($dayLabels as $dayLabel)
                                         <div class="flex-1 min-w-[10rem] px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-md text-center text-xs uppercase text-gray-500 dark:text-gray-400">{{ $dayLabel }}</div>
                                     @endforeach
                                 </div>
 
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 lg:flex lg:gap-2">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 desktop:flex desktop:gap-2">
                                     @foreach($days as $day)
-                                        <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-3 space-y-2 lg:rounded-none lg:border-0 lg:p-0 lg:flex-1 lg:min-w-[10rem]">
-                                            <div class="lg:hidden px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-md text-center text-xs uppercase text-gray-500 dark:text-gray-400">{{ $dayLabels[$day] }}</div>
+                                        <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-3 space-y-2 desktop:rounded-none desktop:border-0 desktop:p-0 desktop:flex-1 desktop:min-w-[10rem]">
+                                            <div class="desktop:hidden px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-md text-center text-xs uppercase text-gray-500 dark:text-gray-400">{{ $dayLabels[$day] }}</div>
                                             @foreach($meals as $mealKey => $mealLabel)
                                                 @php $slotKey = "{$day}_{$mealKey}"; @endphp
                                                 <div class="min-h-[7rem] rounded-xl border border-dashed border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 p-2 flex flex-col justify-between" data-slot="{{ $slotKey }}" data-baby="false" ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -88,21 +88,21 @@
                                 </div>
                                 <p class="text-xs text-gray-500 dark:text-gray-400 mb-3">Midi et goûter</p>
 
-                                <div class="lg:overflow-x-auto lg:pb-3">
-                                    <div class="space-y-3 lg:space-y-0 lg:min-w-[72rem]">
-                                        <div class="hidden lg:flex gap-2 mb-2">
+                                <div class="desktop:overflow-x-auto desktop:pb-3">
+                                    <div class="space-y-3 desktop:space-y-0 desktop:min-w-[72rem]">
+                                        <div class="hidden desktop:flex gap-2 mb-2">
                                             @foreach($dayLabels as $dayLabel)
                                                 <div class="flex-1 min-w-[10rem] px-2 py-1 bg-pink-100 dark:bg-pink-900/30 rounded-md text-center text-xs uppercase text-pink-600 dark:text-pink-300">{{ $dayLabel }}</div>
                                             @endforeach
                                         </div>
 
-                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 lg:flex lg:gap-2">
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 desktop:flex desktop:gap-2">
                                             @php
                                                 $babyMeals = ['midi' => 'Midi', 'gouter' => 'Goûter'];
                                             @endphp
                                             @foreach($days as $day)
-                                                <div class="rounded-xl border border-pink-200 dark:border-pink-800 p-3 space-y-2 lg:rounded-none lg:border-0 lg:p-0 lg:flex-1 lg:min-w-[10rem]">
-                                                    <div class="lg:hidden px-2 py-1 bg-pink-100 dark:bg-pink-900/30 rounded-md text-center text-xs uppercase text-pink-600 dark:text-pink-300">{{ $dayLabels[$day] }}</div>
+                                                <div class="rounded-xl border border-pink-200 dark:border-pink-800 p-3 space-y-2 desktop:rounded-none desktop:border-0 desktop:p-0 desktop:flex-1 desktop:min-w-[10rem]">
+                                                    <div class="desktop:hidden px-2 py-1 bg-pink-100 dark:bg-pink-900/30 rounded-md text-center text-xs uppercase text-pink-600 dark:text-pink-300">{{ $dayLabels[$day] }}</div>
                                                     @foreach($babyMeals as $mealKey => $mealLabel)
                                                         @php
                                                             $slotKey = "{$day}_{$mealKey}";
