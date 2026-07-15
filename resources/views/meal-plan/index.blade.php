@@ -5,7 +5,7 @@
                 <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">{{ __('Planning de repas') }}</h2>
                 <p class="text-sm text-gray-600 dark:text-gray-400">Organisez votre semaine et générez automatiquement la liste de courses.</p>
             </div>
-            <div class="flex items-center gap-3">
+            <div class="flex flex-wrap items-center gap-2 sm:gap-3">
                 <a href="{{ route('dishes.index') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-indigo-500">Gérer les plats</a>
                 <a href="{{ route('dishes.create') }}" class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-green-500">Ajouter un plat</a>
             </div>
@@ -13,35 +13,38 @@
     </x-slot>
 
     <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid gap-6">
                 <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg p-4">
                     <form id="plan-form" method="POST" action="{{ route('meal-plan.save') }}">
                         @csrf
                         <input type="hidden" name="week_start" value="{{ $weekStart }}" />
-                        <div class="flex items-center justify-between mb-4">
-                            <div>
+                        <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between mb-4">
+                            <div class="w-full sm:w-auto">
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Semaine du</label>
-                                <input type="date" name="week_start" value="{{ $weekStart }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+                                <input type="date" name="week_start" value="{{ $weekStart }}" class="mt-1 block w-full sm:w-auto rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
                             </div>
-                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-green-500" id="save-plan">Enregistrer le planning</button>
+                            <button type="submit" class="inline-flex items-center justify-center w-full sm:w-auto px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-green-500" id="save-plan">Enregistrer le planning</button>
                         </div>
 
-                        <div class="overflow-x-auto pb-3">
-                            <div class="min-w-[72rem]">
-                                <div class="flex gap-2 mb-2">
-                                    @foreach(['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'] as $day)
-                                        <div class="flex-1 min-w-[10rem] px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-md text-center text-xs uppercase text-gray-500 dark:text-gray-400">{{ $day }}</div>
+                        @php
+                            $dayLabels = ['monday' => 'Lundi', 'tuesday' => 'Mardi', 'wednesday' => 'Mercredi', 'thursday' => 'Jeudi', 'friday' => 'Vendredi', 'saturday' => 'Samedi', 'sunday' => 'Dimanche'];
+                            $days = array_keys($dayLabels);
+                            $meals = ['midi' => 'Midi', 'soir' => 'Soir'];
+                        @endphp
+
+                        <div class="lg:overflow-x-auto lg:pb-3">
+                            <div class="space-y-3 lg:space-y-0 lg:min-w-[72rem]">
+                                <div class="hidden lg:flex gap-2 mb-2">
+                                    @foreach($dayLabels as $dayLabel)
+                                        <div class="flex-1 min-w-[10rem] px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-md text-center text-xs uppercase text-gray-500 dark:text-gray-400">{{ $dayLabel }}</div>
                                     @endforeach
                                 </div>
 
-                                <div class="flex gap-2">
-                                    @php
-                                        $days = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday'];
-                                        $meals = ['midi' => 'Midi', 'soir' => 'Soir'];
-                                    @endphp
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 lg:flex lg:gap-2">
                                     @foreach($days as $day)
-                                        <div class="flex-1 min-w-[10rem] space-y-2">
+                                        <div class="rounded-xl border border-gray-200 dark:border-gray-700 p-3 space-y-2 lg:rounded-none lg:border-0 lg:p-0 lg:flex-1 lg:min-w-[10rem]">
+                                            <div class="lg:hidden px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-md text-center text-xs uppercase text-gray-500 dark:text-gray-400">{{ $dayLabels[$day] }}</div>
                                             @foreach($meals as $mealKey => $mealLabel)
                                                 @php $slotKey = "{$day}_{$mealKey}"; @endphp
                                                 <div class="min-h-[7rem] rounded-xl border border-dashed border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 p-2 flex flex-col justify-between" data-slot="{{ $slotKey }}" data-baby="false" ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -85,20 +88,21 @@
                                 </div>
                                 <p class="text-xs text-gray-500 dark:text-gray-400 mb-3">Midi et goûter</p>
 
-                                <div class="overflow-x-auto pb-3">
-                                    <div class="min-w-[72rem]">
-                                        <div class="flex gap-2 mb-2">
-                                            @foreach(['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'] as $day)
-                                                <div class="flex-1 min-w-[10rem] px-2 py-1 bg-pink-100 dark:bg-pink-900/30 rounded-md text-center text-xs uppercase text-pink-600 dark:text-pink-300">{{ $day }}</div>
+                                <div class="lg:overflow-x-auto lg:pb-3">
+                                    <div class="space-y-3 lg:space-y-0 lg:min-w-[72rem]">
+                                        <div class="hidden lg:flex gap-2 mb-2">
+                                            @foreach($dayLabels as $dayLabel)
+                                                <div class="flex-1 min-w-[10rem] px-2 py-1 bg-pink-100 dark:bg-pink-900/30 rounded-md text-center text-xs uppercase text-pink-600 dark:text-pink-300">{{ $dayLabel }}</div>
                                             @endforeach
                                         </div>
 
-                                        <div class="flex gap-2">
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 lg:flex lg:gap-2">
                                             @php
                                                 $babyMeals = ['midi' => 'Midi', 'gouter' => 'Goûter'];
                                             @endphp
                                             @foreach($days as $day)
-                                                <div class="flex-1 min-w-[10rem] space-y-2">
+                                                <div class="rounded-xl border border-pink-200 dark:border-pink-800 p-3 space-y-2 lg:rounded-none lg:border-0 lg:p-0 lg:flex-1 lg:min-w-[10rem]">
+                                                    <div class="lg:hidden px-2 py-1 bg-pink-100 dark:bg-pink-900/30 rounded-md text-center text-xs uppercase text-pink-600 dark:text-pink-300">{{ $dayLabels[$day] }}</div>
                                                     @foreach($babyMeals as $mealKey => $mealLabel)
                                                         @php
                                                             $slotKey = "{$day}_{$mealKey}";
@@ -148,9 +152,9 @@
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Plats disponibles</h3>
                         <div class="space-y-2">
                             @forelse($dishes as $dish)
-                                <div class="flex items-center justify-between rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 p-3" draggable="true" data-dish-id="{{ $dish->id }}" ondragstart="drag(event)">
-                                    <div class="text-sm font-medium text-gray-800 dark:text-gray-100">{{ $dish->name }}</div>
-                                    <div class="text-xs text-gray-500">{{ $dish->ingredients->count() }} ingr.</div>
+                                <div class="flex items-center justify-between gap-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 p-3" draggable="true" data-dish-id="{{ $dish->id }}" ondragstart="drag(event)">
+                                    <div class="text-sm font-medium text-gray-800 dark:text-gray-100 min-w-0 break-words">{{ $dish->name }}</div>
+                                    <div class="text-xs text-gray-500 shrink-0">{{ $dish->ingredients->count() }} ingr.</div>
                                 </div>
                             @empty
                                 <div class="text-sm text-gray-500">Aucun plat défini. Ajoutez-en sur la page Plats.</div>
@@ -163,9 +167,9 @@
                             <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Plats bébé disponibles</h3>
                             <div class="space-y-2">
                                 @forelse($babyDishes as $dish)
-                                    <div class="flex items-center justify-between rounded-lg border border-pink-200 dark:border-pink-800 bg-pink-50 dark:bg-gray-900 p-3" draggable="true" data-dish-id="{{ $dish->id }}" ondragstart="drag(event)">
-                                        <div class="text-sm font-medium text-gray-800 dark:text-gray-100">{{ $dish->name }}</div>
-                                        <div class="text-xs text-gray-500">{{ $dish->ingredients->count() }} ingr.</div>
+                                    <div class="flex items-center justify-between gap-3 rounded-lg border border-pink-200 dark:border-pink-800 bg-pink-50 dark:bg-gray-900 p-3" draggable="true" data-dish-id="{{ $dish->id }}" ondragstart="drag(event)">
+                                        <div class="text-sm font-medium text-gray-800 dark:text-gray-100 min-w-0 break-words">{{ $dish->name }}</div>
+                                        <div class="text-xs text-gray-500 shrink-0">{{ $dish->ingredients->count() }} ingr.</div>
                                     </div>
                                 @empty
                                     <div class="text-sm text-gray-500">Aucun plat bébé. Cochez « Plat bébé » lors de la création d'un plat.</div>
@@ -178,9 +182,9 @@
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Liste de courses</h3>
                         <div class="space-y-2">
                             @forelse($shopping as $item)
-                                <label class="flex items-center gap-2 rounded-md border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 p-2">
-                                    <input type="checkbox" class="h-4 w-4 text-indigo-600 border-gray-300 rounded" />
-                                    <span class="text-sm text-gray-700 dark:text-gray-200">{{ $item['name'] }} — Quantité : {{ $item['quantity'] }} - Volume unitaire : {{ $item['unit'] }}</span>
+                                <label class="flex items-start gap-2 rounded-md border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 p-2">
+                                    <input type="checkbox" class="mt-0.5 h-4 w-4 shrink-0 text-indigo-600 border-gray-300 rounded" />
+                                    <span class="text-sm text-gray-700 dark:text-gray-200 break-words">{{ $item['name'] }} — Quantité : {{ $item['quantity'] }} - Volume unitaire : {{ $item['unit'] }}</span>
                                 </label>
                             @empty
                                 <p class="text-sm text-gray-500">Aucun ingrédient sélectionné pour cette semaine.</p>

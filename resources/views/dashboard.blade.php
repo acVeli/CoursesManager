@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid gap-6 lg:grid-cols-2">
                 <a href="{{ route('dashboard') }}" class="block rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 hover:border-indigo-500 transition">
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Planning de repas</h3>
