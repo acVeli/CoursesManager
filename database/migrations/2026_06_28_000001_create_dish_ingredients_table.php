@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('quantity');
             $table->string('unit')->nullable();
+            $table->boolean('baby')->default(false);
             $table->timestamps();
         });
     }

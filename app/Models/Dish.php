@@ -13,6 +13,7 @@ class Dish extends Model
         'user_id',
         'name',
         'description',
+        'baby',
     ];
 
     public function user()

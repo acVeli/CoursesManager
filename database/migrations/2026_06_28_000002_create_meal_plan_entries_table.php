@@ -15,8 +15,8 @@ return new class extends Migration
             $table->string('day_of_week');
             $table->string('meal');
             $table->foreignId('dish_id')->nullable()->constrained('dishes')->nullOnDelete();
+            $table->foreignId('baby_dish_id')->nullable()->constrained('dishes')->nullOnDelete();
             $table->timestamps();
-
             $table->unique(['user_id', 'week_start', 'day_of_week', 'meal'], 'meal_plan_unique_slot');
         });
     }

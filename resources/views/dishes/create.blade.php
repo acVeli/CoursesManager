@@ -24,6 +24,14 @@
                             <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">Commencez par nommer votre plat, puis ajoutez les ingrédients.</p>
                         </div>
 
+                        @if(auth()->user()->has_baby)
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Plat bébé</label>
+                                <input type="checkbox" name="baby" value="1" {{ old('baby') ? 'checked' : '' }} class="mt-2 mb-2 block rounded-xl border border-gray-300 bg-white dark:bg-gray-800 text-gray-900
+                                dark:text-gray-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                            </div>
+                        @endif
+
                         <div>
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nom du plat</label>
                             <input type="text" name="name" value="{{ old('name') }}" class="mt-1 block w-full rounded-xl border border-gray-300 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="Ex. Poulet au curry" required />

@@ -15,6 +15,7 @@ class MealPlanEntry extends Model
         'day_of_week',
         'meal',
         'dish_id',
+        'baby_dish_id',
     ];
 
     protected $casts = [
@@ -29,5 +30,10 @@ class MealPlanEntry extends Model
     public function dish()
     {
         return $this->belongsTo(Dish::class);
+    }
+
+    public function babyDish()
+    {
+        return $this->belongsTo(Dish::class, 'baby_dish_id');
     }
 }

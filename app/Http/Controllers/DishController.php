@@ -31,12 +31,14 @@ class DishController extends Controller
             'ingredients.*.name' => 'required|string|max:255',
             'ingredients.*.quantity' => 'required|numeric',
             'ingredients.*.unit' => 'nullable|string|max:100',
+            'baby' => 'nullable|boolean',
         ]);
 
         $dish = Dish::create([
             'user_id' => $request->user()->id,
             'name' => $request->input('name'),
             'description' => $request->input('description'),
+            'baby' => $request->user()->has_baby && $request->boolean('baby'),
         ]);
 
         foreach ($request->input('ingredients') as $ingredient) {
@@ -66,6 +68,7 @@ class DishController extends Controller
             'ingredients.*.name' => 'required|string|max:255',
             'ingredients.*.quantity' => 'required|numeric',
             'ingredients.*.unit' => 'nullable|string|max:100',
+            'baby' => 'nullable|boolean',
         ]);
 
         $dish->update($request->only(['name', 'description']));

@@ -30,7 +30,20 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+            'has_baby' => false,
+            'baby_birth_date' => null,
         ];
+    }
+
+    /**
+     * Indicate that the user has a baby.
+     */
+    public function withBaby(?\DateTimeInterface $birthDate = null): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'has_baby' => true,
+            'baby_birth_date' => $birthDate ?? now()->subMonths(8)->toDateString(),
+        ]);
     }
 
     /**

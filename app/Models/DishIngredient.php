@@ -14,6 +14,7 @@ class DishIngredient extends Model
         'name',
         'quantity',
         'unit',
+        'baby',
     ];
 
     public function dish()
