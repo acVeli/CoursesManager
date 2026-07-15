@@ -6,7 +6,7 @@
                 <p class="text-sm text-gray-600 dark:text-gray-400">Créez, modifiez et supprimez vos plats.</p>
             </div>
             <div>
-                <a href="{{ route('dishes.create') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-indigo-500">Nouveau plat</a>
+                <a href="{{ route('dishes.create') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-500">Nouveau plat</a>
             </div>
         </div>
     </x-slot>
@@ -23,11 +23,11 @@
                                 <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">{{ $dish->ingredients->count() }} ingrédient(s)</p>
                             </div>
                             <div class="flex items-center gap-2">
-                                <a href="{{ route('dishes.edit', $dish) }}" class="inline-flex items-center px-3 py-2 bg-yellow-500 text-black rounded-md text-xs font-semibold hover:bg-yellow-400">Modifier</a>
+                                <a href="{{ route('dishes.edit', $dish) }}" class="inline-flex items-center px-3 py-2 bg-amber-500 text-white rounded-md text-xs font-semibold hover:bg-amber-400">Modifier</a>
                                 <form method="POST" action="{{ route('dishes.destroy', $dish) }}" onsubmit="return confirm('Supprimer ce plat ?');">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="inline-flex items-center px-3 py-2 bg-red-600 text-black rounded-md text-xs font-semibold hover:bg-red-500">Supprimer</button>
+                                    <button type="submit" class="inline-flex items-center px-3 py-2 bg-red-600 text-white rounded-md text-xs font-semibold hover:bg-red-500">Supprimer</button>
                                 </form>
                             </div>
                         </div>

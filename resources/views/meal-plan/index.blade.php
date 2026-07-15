@@ -6,8 +6,8 @@
                 <p class="text-sm text-gray-600 dark:text-gray-400">Organisez votre semaine et générez automatiquement la liste de courses.</p>
             </div>
             <div class="flex flex-wrap items-center gap-2 sm:gap-3">
-                <a href="{{ route('dishes.index') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-indigo-500">Gérer les plats</a>
-                <a href="{{ route('dishes.create') }}" class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-green-500">Ajouter un plat</a>
+                <a href="{{ route('dishes.index') }}" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-500">Gérer les plats</a>
+                <a href="{{ route('dishes.create') }}" class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500">Ajouter un plat</a>
             </div>
         </div>
     </x-slot>
@@ -24,7 +24,7 @@
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Semaine du</label>
                                 <input type="date" name="week_start" value="{{ $weekStart }}" class="mt-1 block w-full sm:w-auto rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
                             </div>
-                            <button type="submit" class="inline-flex items-center justify-center w-full sm:w-auto px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-green-500" id="save-plan">Enregistrer le planning</button>
+                            <button type="submit" class="inline-flex items-center justify-center w-full sm:w-auto px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500" id="save-plan">Enregistrer le planning</button>
                         </div>
 
                         @php
@@ -51,7 +51,7 @@
                                                     <div class="text-xs font-semibold text-gray-700 dark:text-gray-200">{{ $mealLabel }}</div>
                                                     <div class="mt-2 grow relative" id="slot-{{ $slotKey }}">
                                                         @if(isset($entries[$slotKey]) && $entries[$slotKey]->dish)
-                                                            <div class="rounded-lg bg-indigo-600 text-black p-2" data-dish-id="{{ $entries[$slotKey]->dish->id }}" draggable="true" ondragstart="drag(event)">{{ $entries[$slotKey]->dish->name }}</div>
+                                                            <div class="rounded-lg bg-indigo-600 text-white p-2" data-dish-id="{{ $entries[$slotKey]->dish->id }}" draggable="true" ondragstart="drag(event)">{{ $entries[$slotKey]->dish->name }}</div>
                                                         @else
                                                             <div class="slot-search">
                                                                 <input type="text" class="slot-search-input w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-100 text-xs shadow-sm focus:border-indigo-500 focus:ring-indigo-500" placeholder="Rechercher un plat…" autocomplete="off" />
@@ -80,7 +80,7 @@
                                             type="button"
                                             x-data=""
                                             x-on:click.prevent="$dispatch('open-modal', 'baby-feeding-guide')"
-                                            class="inline-flex items-center px-3 py-1.5 bg-pink-600 border border-transparent rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-pink-500"
+                                            class="inline-flex items-center px-3 py-1.5 bg-pink-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-pink-500"
                                         >
                                             Recommandations
                                         </button>
@@ -116,7 +116,7 @@
                                                             <div class="text-xs font-semibold text-pink-700 dark:text-pink-300">{{ $mealLabel }}</div>
                                                             <div class="mt-1 grow relative" id="slot-baby-{{ $slotKey }}">
                                                                 @if($entry && $entry->babyDish)
-                                                                    <div class="rounded-lg bg-pink-500 text-black p-2 text-sm"
+                                                                    <div class="rounded-lg bg-pink-500 text-white p-2 text-sm"
                                                                          data-dish-id="{{ $entry->babyDish->id }}"
                                                                          draggable="true"
                                                                          ondragstart="drag(event)">
@@ -278,8 +278,8 @@
 
         function cardClass(slot) {
             return isBabySlot(slot)
-                ? 'rounded-lg bg-pink-500 text-black p-2 text-sm'
-                : 'rounded-lg bg-indigo-600 text-black p-2';
+                ? 'rounded-lg bg-pink-500 text-white p-2 text-sm'
+                : 'rounded-lg bg-indigo-600 text-white p-2';
         }
 
         function slotHasDish(slot) {
