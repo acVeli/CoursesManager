@@ -42,7 +42,7 @@
         <!-- Baby planning -->
         <div class="mt-4" x-data="{ hasBaby: {{ old('has_baby') == '1' ? 'true' : 'false' }} }">
             <x-input-label :value="__('Avez-vous un bébé ?')" />
-            <div class="mt-2 flex gap-6">
+            <div class="mt-2 flex flex-wrap gap-4 desktop:gap-6">
                 <label class="inline-flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300">
                     <input type="radio" name="has_baby" value="1" @change="hasBaby = true" @checked(old('has_baby') == '1') class="border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" />
                     Oui
@@ -61,12 +61,12 @@
             </div>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
+        <div class="flex flex-col-reverse gap-3 desktop:flex-row desktop:items-center desktop:justify-end mt-4">
+            <a class="underline text-sm text-center desktop:text-left text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
                 {{ __('Already registered?') }}
             </a>
 
-            <x-primary-button class="ms-4">
+            <x-primary-button class="w-full justify-center desktop:w-auto desktop:ms-4">
                 {{ __('Register') }}
             </x-primary-button>
         </div>
